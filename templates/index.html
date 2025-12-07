@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Data Analyzer | Sleek Dashboard</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-animation"></div>
+    <div class="container">
+        <header class="main-header">
+            <div class="header-content">
+                <h1 class="title">
+                    <span class="icon">📊</span>
+                    Financial Data Analyzer
+                </h1>
+                <p class="subtitle">Real-time market analysis with interactive visualizations</p>
+            </div>
+        </header>
+
+        <div class="search-section">
+            <div class="search-container">
+                <div class="search-box">
+                    <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <input 
+                        type="text" 
+                        id="tickerInput" 
+                        placeholder="Enter ticker symbol (e.g., AAPL, GOOGL, BTC-USD)"
+                        autocomplete="off"
+                    >
+                    <button id="analyzeBtn" onclick="analyzeTicker()">
+                        <span>Analyze</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="quick-tickers">
+                    <span class="quick-label">Quick Search:</span>
+                    <div class="ticker-buttons">
+                        <button class="ticker-btn" onclick="setTicker('AAPL')">AAPL</button>
+                        <button class="ticker-btn" onclick="setTicker('GOOGL')">GOOGL</button>
+                        <button class="ticker-btn" onclick="setTicker('TSLA')">TSLA</button>
+                        <button class="ticker-btn" onclick="setTicker('MSFT')">MSFT</button>
+                        <button class="ticker-btn" onclick="setTicker('BTC-USD')">BTC-USD</button>
+                        <button class="ticker-btn" onclick="setTicker('ETH-USD')">ETH-USD</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="loading" class="loading hidden">
+            <div class="loading-content">
+                <div class="spinner-wrapper">
+                    <div class="spinner"></div>
+                </div>
+                <p class="loading-text">Fetching real-time data...</p>
+                <p class="loading-subtext">This may take a few seconds</p>
+            </div>
+        </div>
+
+        <div id="error" class="error hidden">
+            <div class="error-content">
+                <svg class="error-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                <span class="error-message"></span>
+            </div>
+        </div>
+
+        <div id="results" class="results hidden">
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-title">
+                        <h2 id="companyName"></h2>
+                        <span class="company-badge" id="companyType"></span>
+                    </div>
+                </div>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-icon">🏢</div>
+                        <div class="info-content">
+                            <span class="info-label">Sector</span>
+                            <span class="info-value" id="sector"></span>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">🏭</div>
+                        <div class="info-content">
+                            <span class="info-label">Industry</span>
+                            <span class="info-value" id="industry"></span>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">📈</div>
+                        <div class="info-content">
+                            <span class="info-label">Exchange</span>
+                            <span class="info-value" id="exchange"></span>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">💰</div>
+                        <div class="info-content">
+                            <span class="info-label">Market Cap</span>
+                            <span class="info-value" id="marketCap"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="statistics-section">
+                <div class="section-header">
+                    <h3>📈 Key Statistics</h3>
+                    <span class="period-badge">Last 12 Months</span>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card primary">
+                        <div class="stat-icon">💵</div>
+                        <div class="stat-content">
+                            <div class="stat-label">Current Price</div>
+                            <div class="stat-value" id="currentPrice"></div>
+                        </div>
+                    </div>
+                    <div class="stat-card success">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-content">
+                            <div class="stat-label">52-Week High</div>
+                            <div class="stat-value" id="high52w"></div>
+                        </div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-icon">📉</div>
+                        <div class="stat-content">
+                            <div class="stat-label">52-Week Low</div>
+                            <div class="stat-value" id="low52w"></div>
+                        </div>
+                    </div>
+                    <div class="stat-card info">
+                        <div class="stat-icon">📐</div>
+                        <div class="stat-content">
+                            <div class="stat-label">Average Price</div>
+                            <div class="stat-value" id="avgPrice"></div>
+                        </div>
+                    </div>
+                    <div class="stat-card gradient-1">
+                        <div class="stat-icon">🔄</div>
+                        <div class="stat-content">
+                            <div class="stat-label">Price Change</div>
+                            <div class="stat-value" id="priceChange"></div>
+                        </div>
+                    </div>
+                    <div class="stat-card gradient-2">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-content">
+                            <div class="stat-label">Change %</div>
+                            <div class="stat-value" id="priceChangePct"></div>
+                        </div>
+                    </div>
+                    <div class="stat-card gradient-3">
+                        <div class="stat-icon">⚡</div>
+                        <div class="stat-content">
+                            <div class="stat-label">Volatility</div>
+                            <div class="stat-value" id="volatility"></div>
+                        </div>
+                    </div>
+                    <div class="stat-card gradient-4">
+                        <div class="stat-icon">📅</div>
+                        <div class="stat-content">
+                            <div class="stat-label">30-Day Average</div>
+                            <div class="stat-value" id="avg30d"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-section">
+                <div class="section-header">
+                    <h3>📊 Price History Chart</h3>
+                    <span class="chart-badge">Interactive</span>
+                </div>
+                <div class="chart-container">
+                    <div id="chart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>Powered by <strong>yfinance</strong> & <strong>Flask</strong> | Data provided by Yahoo Finance</p>
+    </footer>
+
+    <script>
+        function setTicker(ticker) {
+            document.getElementById('tickerInput').value = ticker;
+            analyzeTicker();
+        }
+
+        function analyzeTicker() {
+            const ticker = document.getElementById('tickerInput').value.trim().toUpperCase();
+            
+            if (!ticker) {
+                showError('Please enter a ticker symbol');
+                return;
+            }
+
+            // Show loading, hide results and error
+            document.getElementById('loading').classList.remove('hidden');
+            document.getElementById('results').classList.add('hidden');
+            document.getElementById('error').classList.add('hidden');
+
+            fetch('/analyze', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ ticker: ticker })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('loading').classList.add('hidden');
+                
+                if (data.error) {
+                    showError(data.error);
+                    return;
+                }
+
+                displayResults(data);
+            })
+            .catch(error => {
+                document.getElementById('loading').classList.add('hidden');
+                showError('An error occurred: ' + error.message);
+            });
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('error');
+            const errorMessage = errorDiv.querySelector('.error-message');
+            errorMessage.textContent = message;
+            errorDiv.classList.remove('hidden');
+        }
+
+        function displayResults(data) {
+            // Company info
+            const companyName = document.getElementById('companyName');
+            companyName.textContent = data.company_info.name;
+            
+            // Determine if it's crypto or stock
+            const isCrypto = data.ticker.includes('-USD');
+            const companyType = document.getElementById('companyType');
+            companyType.textContent = isCrypto ? 'Cryptocurrency' : 'Stock';
+            
+            document.getElementById('sector').textContent = data.company_info.sector;
+            document.getElementById('industry').textContent = data.company_info.industry;
+            document.getElementById('exchange').textContent = data.company_info.exchange;
+            
+            const marketCap = data.company_info.market_cap;
+            document.getElementById('marketCap').textContent = marketCap 
+                ? '$' + marketCap.toLocaleString() 
+                : 'N/A';
+
+            // Statistics
+            const stats = data.statistics.formatted;
+            document.getElementById('currentPrice').textContent = stats.current_price;
+            document.getElementById('high52w').textContent = stats.high_52w;
+            document.getElementById('low52w').textContent = stats.low_52w;
+            document.getElementById('avgPrice').textContent = stats.average_price;
+            document.getElementById('priceChange').textContent = stats.price_change;
+            document.getElementById('priceChangePct').textContent = stats.price_change_pct;
+            document.getElementById('volatility').textContent = stats.volatility;
+            document.getElementById('avg30d').textContent = stats.avg_30d;
+
+            // Chart
+            const chartData = JSON.parse(data.chart);
+            Plotly.newPlot('chart', chartData.data, chartData.layout, {
+                responsive: true,
+                displayModeBar: true,
+                modeBarButtonsToRemove: ['pan2d', 'lasso2d']
+            });
+
+            // Show results with animation
+            setTimeout(() => {
+                document.getElementById('results').classList.remove('hidden');
+            }, 100);
+        }
+
+        // Allow Enter key to trigger analysis
+        document.getElementById('tickerInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                analyzeTicker();
+            }
+        });
+
+        // Add focus effect to input
+        document.getElementById('tickerInput').addEventListener('focus', function() {
+            this.parentElement.classList.add('focused');
+        });
+
+        document.getElementById('tickerInput').addEventListener('blur', function() {
+            this.parentElement.classList.remove('focused');
+        });
+    </script>
+</body>
+</html>
