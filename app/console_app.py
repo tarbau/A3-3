@@ -172,4 +172,3 @@ if __name__ == "__main__":
         logger.error(f"Unexpected error: {str(e)}", exc_info=True)
         print(f"\n❌ An error occurred: {str(e)}")
         sys.exit(1)
-

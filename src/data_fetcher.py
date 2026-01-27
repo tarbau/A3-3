@@ -124,7 +124,7 @@ class DataFetcher:
         except Exception as e:
             self.logger.error(f"Error fetching historical data: {str(e)}")
             return None
-    
+
     def get_company_info(self, ticker_obj: yf.Ticker) -> Dict[str, Any]:
         """
         Get company/cryptocurrency information.
@@ -161,8 +161,3 @@ class DataFetcher:
 
 # Create a global instance
 data_fetcher = DataFetcher()
-
-
-
-
-

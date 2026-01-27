@@ -32,7 +32,7 @@ app = Flask(
 app.config.from_object(config)
 
 
-def create_price_chart(chart_data: dict, ticker: str) -> str:
+def create_price_chart(chart_data: dict, ticker: str, forecast_data: dict = None) -> str:
     """
     Create a Plotly chart for price visualization.
     
@@ -69,6 +69,37 @@ def create_price_chart(chart_data: dict, ticker: str) -> str:
             hovertemplate='<b>Date:</b> %{x}<br><b>Volume:</b> %{y:,.0f}<extra></extra>'
         )
     
+    forecast_traces = []
+    if forecast_data:
+        forecast_dates = forecast_data.get('dates', [])
+        forecast_mean = forecast_data.get('mean', [])
+        forecast_lower = forecast_data.get('lower', [])
+        forecast_upper = forecast_data.get('upper', [])
+        if forecast_dates and forecast_mean and len(forecast_dates) == len(forecast_mean):
+            if (
+                forecast_lower and forecast_upper and
+                len(forecast_lower) == len(forecast_upper) == len(forecast_dates)
+            ):
+                band_x = forecast_dates + list(reversed(forecast_dates))
+                band_y = forecast_upper + list(reversed(forecast_lower))
+                forecast_traces.append(go.Scatter(
+                    x=band_x,
+                    y=band_y,
+                    fill='toself',
+                    fillcolor='rgba(255, 127, 14, 0.15)',
+                    line=dict(color='rgba(255, 255, 255, 0)'),
+                    name='Forecast CI',
+                    hoverinfo='skip'
+                ))
+            forecast_traces.append(go.Scatter(
+                x=forecast_dates,
+                y=forecast_mean,
+                mode='lines',
+                name='Forecast',
+                line=dict(color='#ff7f0e', width=2, dash='dash'),
+                hovertemplate='<b>Date:</b> %{x}<br><b>Forecast:</b> $%{y:.2f}<extra></extra>'
+            ))
+    
     # Create layout
     layout = go.Layout(
         title={
@@ -100,9 +131,13 @@ def create_price_chart(chart_data: dict, ticker: str) -> str:
             side='right',
             showgrid=False
         )
-        fig = go.Figure(data=[price_trace, volume_trace], layout=layout)
-    else:
-        fig = go.Figure(data=[price_trace], layout=layout)
+    
+    traces = [price_trace]
+    if volume_trace:
+        traces.append(volume_trace)
+    traces.extend(forecast_traces)
+    
+    fig = go.Figure(data=traces, layout=layout)
     
     # Convert to JSON
     graph_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
@@ -155,10 +190,9 @@ def analyze():
         
         # Get historical data
         historical_data = data_fetcher.get_historical_data(ticker_obj)
+        
         if historical_data is None or historical_data.empty:
-            return jsonify({
-                "error": "Failed to fetch historical data"
-            }), 500
+            return jsonify({"error": "Failed to fetch historical data"}), 500
         
         # Calculate statistics
         stats = analyzer.calculate_statistics(
@@ -169,7 +203,27 @@ def analyze():
         
         # Prepare chart data
         chart_data = analyzer.prepare_chart_data(historical_data)
-        chart_json = create_price_chart(chart_data, ticker)
+        forecast_data = None
+        if config.ENABLE_ARIMA_FORECAST:
+            try:
+                from src.extensions.forecasting.arima_forecaster import (
+                    forecast_close_prices,
+                    ForecastError
+                )
+                forecast_data = forecast_close_prices(
+                    historical_data,
+                    steps=config.FORECAST_STEPS,
+                    order=config.ARIMA_ORDER,
+                    alpha=config.FORECAST_ALPHA,
+                    trend=config.ARIMA_TREND,
+                    use_log=config.FORECAST_USE_LOG
+                )
+            except ForecastError as e:
+                logger.warning(f"Forecast unavailable for {ticker}: {str(e)}")
+            except Exception as e:
+                logger.warning(f"Forecast error for {ticker}: {str(e)}")
+        
+        chart_json = create_price_chart(chart_data, ticker, forecast_data)
         
         # Prepare response
         response = {
@@ -179,6 +233,8 @@ def analyze():
             "statistics": stats,
             "chart": chart_json
         }
+        if forecast_data:
+            response["forecast"] = forecast_data
         
         return jsonify(response)
         
@@ -211,4 +267,3 @@ if __name__ == "__main__":
         print("\n\n👋 Server stopped. Goodbye!")
     except Exception as e:
         logger.error(f"Error starting server: {str(e)}", exc_info=True)
-

@@ -13,6 +13,3 @@ python-dotenv==1.0.0
 # Development (optional)
 pytest==7.4.3
 black==23.12.1
-
-
-
