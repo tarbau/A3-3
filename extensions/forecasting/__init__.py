@@ -1,3 +1,0 @@
-"""
-Forecasting extensions (optional).
-"""
