@@ -242,6 +242,13 @@ Dieses Projekt ist Open Source und für Bildungszwecke verfügbar.
 
 Bei Fragen oder Problemen öffnen Sie bitte ein Issue auf GitHub.
 
+## 🤖 LLM-Unterstützung
+
+Dieses Projekt wurde mit Hilfe von Large Language Models (LLMs) entwickelt. LLMs unterstützten bei:
+- **Debugging**: Fehleranalyse und Problemlösung
+- **Code-Erklärungen**: Dokumentation und Konzept-Vermittlung
+- **Frontend-Entwicklung**: UI/UX-Design, responsive Chart-Darstellung und CSS-Optimierung
+
 ---
 
 **Viel Erfolg beim Analysieren! 📈**
