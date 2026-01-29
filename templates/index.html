@@ -279,18 +279,20 @@
             document.getElementById('volatility').textContent = stats.volatility;
             document.getElementById('avg30d').textContent = stats.avg_30d;
 
+            // Make sure results section is visible before rendering the chart
+            const resultsEl = document.getElementById('results');
+            resultsEl.classList.remove('hidden');
+
             // Chart
             const chartData = JSON.parse(data.chart);
             Plotly.newPlot('chart', chartData.data, chartData.layout, {
                 responsive: true,
                 displayModeBar: true,
                 modeBarButtonsToRemove: ['pan2d', 'lasso2d']
+            }).then(() => {
+                // Ensure Plotly recalculates size after being unhidden
+                Plotly.Plots.resize('chart');
             });
-
-            // Show results with animation
-            setTimeout(() => {
-                document.getElementById('results').classList.remove('hidden');
-            }, 100);
         }
 
         // Allow Enter key to trigger analysis
