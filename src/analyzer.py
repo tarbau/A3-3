@@ -60,9 +60,9 @@ class FinancialAnalyzer:
             price_change = current - first_price
             price_change_pct = (price_change / first_price) if first_price > 0 else 0
             
-            # Calculate volatility (standard deviation of returns)
-            returns = prices.pct_change().dropna()
-            volatility = float(returns.std()) if len(returns) > 0 else 0.0
+            # Calculate volatility (standard deviation of daily percentage price changes)
+            daily_pct_change = prices.pct_change().dropna()
+            volatility = float(daily_pct_change.std()) if len(daily_pct_change) > 0 else 0.0
             
             # Calculate 30-day and 90-day averages
             avg_30d = float(prices.tail(30).mean()) if len(prices) >= 30 else None
@@ -158,5 +158,4 @@ class FinancialAnalyzer:
 
 # Create a global instance
 analyzer = FinancialAnalyzer()
-
 
