@@ -1,38 +1,38 @@
-# 📊 Financial Data Analyzer
+# 📊 Finanzdaten-Analysator
 
-A comprehensive Python application for analyzing stocks and cryptocurrencies with both console and web interfaces. Fetch real-time financial data, calculate statistics, and visualize trends with interactive charts.
+Eine umfassende Python-Anwendung zur Analyse von Aktien und Kryptowährungen mit sowohl Konsolen-als auch Web-Oberflächen. Abrufen von Echtzeit-Finanzdaten, Berechnung von Statistiken und Visualisierung von Trends mit interaktiven Diagrammen.
 
-## ✨ Features
+## ✨ Funktionen
 
-- **📈 Real-time Data Fetching**: Get up-to-date financial data for stocks and cryptocurrencies using yfinance
-- **🔢 Statistical Analysis**: Calculate key metrics including:
-  - Current price, 52-week high/low
-  - Average prices (30-day, 90-day, overall)
-  - Price changes and percentages
-  - Volatility calculations
-- **💻 Dual Interface**:
-  - **Console Application**: Command-line interface for quick analysis
-  - **Web Dashboard**: Interactive browser-based interface with Plotly charts
-- **📊 Interactive Visualizations**: Beautiful, interactive charts showing price history and volume
-- **🌐 Multi-Asset Support**: Analyze stocks (AAPL, GOOGL, TSLA) and cryptocurrencies (BTC-USD, ETH-USD)
-- **🏗️ Modular Architecture**: Clean, maintainable code structure with separation of concerns
+- **📈 Echtzeit-Datenabruf**: Abrufen aktueller Finanzdaten für Aktien und Kryptowährungen mit yfinance
+- **🔢 Statistische Analyse**: Berechnung wichtiger Kennzahlen einschließlich:
+  - Aktueller Preis, 52-Wochen-Hoch/Tief
+  - Durchschnittspreise (30-Tage, 90-Tage, gesamt)
+  - Preisänderungen und Prozentsätze
+  - Volatilitätsberechnungen
+- **💻 Doppelte Benutzeroberfläche**:
+  - **Konsolen-Anwendung**: Befehlszeilen-Interface für schnelle Analysen
+  - **Web-Dashboard**: Interaktive browserbasierte Oberfläche mit Plotly-Diagrammen
+- **📊 Interaktive Visualisierungen**: Schöne, interaktive Diagramme mit Preisverlauf und Volumen
+- **🌐 Multi-Asset-Unterstützung**: Analyse von Aktien (AAPL, GOOGL, TSLA) und Kryptowährungen (BTC-USD, ETH-USD)
+- **🏗️ Modulare Architektur**: Saubere, wartbare Codestruktur mit klarer Trennung der Verantwortlichkeiten
 
-## 🚀 Quick Start
+## 🚀 Schnellstart
 
-### Prerequisites
+### Voraussetzungen
 
-- Python 3.8 or higher
-- Internet connection (for fetching data)
+- Python 3.8 oder höher
+- Internetverbindung (zum Abrufen von Daten)
 
 ### Installation
 
-1. **Clone the repository**
+1. **Repository klonen**
    ```bash
    git clone https://github.com/tarbau/A3-3.git
    cd A3-3
    ```
 
-2. **Create and activate virtual environment**
+2. **Virtuelle Umgebung erstellen und aktivieren**
 
    **Windows:**
    ```bash
@@ -46,202 +46,202 @@ A comprehensive Python application for analyzing stocks and cryptocurrencies wit
    source venv/bin/activate
    ```
 
-3. **Install dependencies**
+3. **Abhängigkeiten installieren**
    ```bash
    pip install -r requirements.txt
    ```
 
-### Running the Application
+### Anwendung starten
 
-#### Option 1: Console Application
+#### Option 1: Konsolen-Anwendung
 
 ```bash
 python -m app.console_app AAPL
 ```
 
-Replace `AAPL` with any ticker symbol (e.g., `GOOGL`, `TSLA`, `BTC-USD`).
+Ersetzen Sie `AAPL` durch ein beliebiges Ticker-Symbol (z.B. `GOOGL`, `TSLA`, `BTC-USD`).
 
-#### Option 2: Web Dashboard
+#### Option 2: Web-Dashboard
 
 ```bash
 python -m app.web_app
 ```
 
-Then open your browser and navigate to: `http://localhost:5000`
+Öffnen Sie dann Ihren Browser und navigieren Sie zu: `http://localhost:5000`
 
-#### Option 3: Use Batch Files (Windows)
+#### Option 3: Batch-Dateien verwenden (Windows)
 
-- Double-click `run_console.bat` for console app
-- Double-click `run_web.bat` for web dashboard
+- Doppelklicken Sie auf `run_console.bat` für die Konsolen-App
+- Doppelklicken Sie auf `run_web.bat` für das Web-Dashboard
 
-## 📖 Usage Examples
+## 📖 Verwendungsbeispiele
 
-### Console Application
+### Konsolen-Anwendung
 
 ```bash
-# Analyze Apple stock
+# Apple-Aktie analysieren
 python -m app.console_app AAPL
 
-# Analyze Bitcoin
+# Bitcoin analysieren
 python -m app.console_app BTC-USD
 
-# Analyze Tesla
+# Tesla analysieren
 python -m app.console_app TSLA
 ```
 
-### Web Dashboard
+### Web-Dashboard
 
-1. Start the server: `python -m app.web_app`
-2. Open `http://localhost:5000` in your browser
-3. Enter a ticker symbol (e.g., `AAPL`, `GOOGL`, `BTC-USD`)
-4. Click "Analyze" to see interactive charts and statistics
+1. Server starten: `python -m app.web_app`
+2. `http://localhost:5000` im Browser öffnen
+3. Ticker-Symbol eingeben (z.B. `AAPL`, `GOOGL`, `BTC-USD`)
+4. Auf "Analyze" klicken, um interaktive Diagramme und Statistiken zu sehen
 
-### Programmatic Usage
+### Programmatische Verwendung
 
 ```python
 from src.data_fetcher import data_fetcher
 from src.analyzer import analyzer
 
-# Fetch data
+# Daten abrufen
 ticker_obj = data_fetcher.fetch_data("AAPL")
 
-# Get company info
+# Unternehmensinformationen abrufen
 company_info = data_fetcher.get_company_info(ticker_obj)
 
-# Get current price
+# Aktuellen Preis abrufen
 current_price = data_fetcher.get_current_price(ticker_obj)
 
-# Get historical data
+# Historische Daten abrufen
 historical_data = data_fetcher.get_historical_data(ticker_obj)
 
-# Calculate statistics
+# Statistiken berechnen
 stats = analyzer.calculate_statistics(historical_data, current_price, "USD")
 ```
 
-See `example_usage.py` for more detailed examples.
+Siehe `example_usage.py` für detailliertere Beispiele.
 
-## 📁 Project Structure
+## 📁 Projektstruktur
 
 ```
 SemProject/
 ├── app/
-│   ├── console_app.py      # Console application entry point
-│   └── web_app.py          # Flask web application
+│   ├── console_app.py      # Einstiegspunkt der Konsolen-Anwendung
+│   └── web_app.py          # Flask-Webanwendung
 ├── src/
-│   ├── analyzer.py         # Financial analysis and statistics
-│   ├── data_fetcher.py     # Data fetching from yfinance
-│   ├── config.py           # Configuration management
-│   └── utils.py            # Utility functions
+│   ├── analyzer.py         # Finanzanalyse und Statistiken
+│   ├── data_fetcher.py     # Datenabruf von yfinance
+│   ├── config.py           # Konfigurationsverwaltung
+│   └── utils.py            # Hilfsfunktionen
 ├── templates/
-│   └── index.html          # Web dashboard HTML template
+│   └── index.html          # HTML-Vorlage für Web-Dashboard
 ├── static/
-│   └── style.css           # Web dashboard styles
+│   └── style.css           # Styles für Web-Dashboard
 ├── tests/
-│   └── test_utils.py       # Unit tests
-├── requirements.txt        # Python dependencies
-├── example_usage.py        # Example usage script
-├── QUICKSTART.md           # Quick start guide
-├── SETUP_GUIDE.md          # Detailed setup instructions
-└── README.md               # This file
+│   └── test_utils.py       # Unit-Tests
+├── requirements.txt        # Python-Abhängigkeiten
+├── example_usage.py        # Beispiel-Verwendungsskript
+├── QUICKSTART.md           # Schnellstart-Anleitung
+├── SETUP_GUIDE.md          # Detaillierte Installationsanweisungen
+└── README.md               # Diese Datei
 ```
 
-## 🛠️ Technologies Used
+## 🛠️ Verwendete Technologien
 
-- **Python 3.8+**: Core programming language
-- **yfinance**: Financial data fetching
-- **pandas**: Data manipulation and analysis
-- **numpy**: Numerical computations
-- **Flask**: Web framework
-- **Plotly**: Interactive data visualization
-- **python-dotenv**: Environment variable management
+- **Python 3.8+**: Kernprogrammiersprache
+- **yfinance**: Finanzdatenabruf
+- **pandas**: Datenmanipulation und -analyse
+- **numpy**: Numerische Berechnungen
+- **Flask**: Web-Framework
+- **Plotly**: Interaktive Datenvisualisierung
+- **python-dotenv**: Verwaltung von Umgebungsvariablen
 
-## 📊 Supported Tickers
+## 📊 Unterstützte Ticker
 
-### Stocks
+### Aktien
 - `AAPL` - Apple Inc.
 - `GOOGL` - Alphabet Inc. (Google)
 - `MSFT` - Microsoft Corporation
 - `TSLA` - Tesla, Inc.
 - `AMZN` - Amazon.com, Inc.
-- And many more...
+- Und viele mehr...
 
-### Cryptocurrencies
+### Kryptowährungen
 - `BTC-USD` - Bitcoin
 - `ETH-USD` - Ethereum
 - `DOGE-USD` - Dogecoin
 - `BNB-USD` - Binance Coin
-- And many more...
+- Und viele mehr...
 
-## ⚙️ Configuration
+## ⚙️ Konfiguration
 
-Configuration is managed in `src/config.py`. You can customize:
+Die Konfiguration wird in `src/config.py` verwaltet. Sie können anpassen:
 
-- **Data Period**: Default is `1y` (1 year)
-  - Options: `1d`, `5d`, `1mo`, `3mo`, `6mo`, `1y`, `2y`, `5y`, `10y`, `ytd`, `max`
-- **Data Interval**: Default is `1d` (daily)
-  - Options: `1m`, `5m`, `15m`, `30m`, `1h`, `1d`, `5d`, `1wk`, `1mo`
-- **Flask Settings**: Debug mode, environment variables
+- **Datenperiode**: Standard ist `1y` (1 Jahr)
+  - Optionen: `1d`, `5d`, `1mo`, `3mo`, `6mo`, `1y`, `2y`, `5y`, `10y`, `ytd`, `max`
+- **Datenintervall**: Standard ist `1d` (täglich)
+  - Optionen: `1m`, `5m`, `15m`, `30m`, `1h`, `1d`, `5d`, `1wk`, `1mo`
+- **Flask-Einstellungen**: Debug-Modus, Umgebungsvariablen
 
-## 🐛 Troubleshooting
+## 🐛 Fehlerbehebung
 
 ### ModuleNotFoundError
-- **Solution**: Make sure virtual environment is activated and dependencies are installed
+- **Lösung**: Stellen Sie sicher, dass die virtuelle Umgebung aktiviert ist und die Abhängigkeiten installiert sind
   ```bash
   pip install -r requirements.txt
   ```
 
-### Can't Fetch Data
-- **Solution**: 
-  - Check your internet connection
-  - Verify the ticker symbol is correct
-  - Try a different ticker (e.g., `AAPL`, `GOOGL`, `BTC-USD`)
+### Daten können nicht abgerufen werden
+- **Lösung**: 
+  - Überprüfen Sie Ihre Internetverbindung
+  - Überprüfen Sie, ob das Ticker-Symbol korrekt ist
+  - Versuchen Sie ein anderes Ticker (z.B. `AAPL`, `GOOGL`, `BTC-USD`)
 
-### Port 5000 Already in Use
-- **Solution**: Change the port in `app/web_app.py` (line 207) or stop the process using port 5000
+### Port 5000 bereits in Verwendung
+- **Lösung**: Ändern Sie den Port in `app/web_app.py` (Zeile 207) oder beenden Sie den Prozess, der Port 5000 verwendet
 
-### Execution Policy Error (Windows)
-- **Solution**: Run this command in PowerShell:
+### Ausführungsrichtlinien-Fehler (Windows)
+- **Lösung**: Führen Sie diesen Befehl in PowerShell aus:
   ```powershell
   Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
   ```
 
-## 📚 Documentation
+## 📚 Dokumentation
 
-- **QUICKSTART.md**: Quick start guide (5 minutes)
-- **SETUP_GUIDE.md**: Detailed setup instructions
-- **START_HERE.md**: Step-by-step getting started guide
+- **QUICKSTART.md**: Schnellstart-Anleitung (5 Minuten)
+- **SETUP_GUIDE.md**: Detaillierte Installationsanweisungen
+- **START_HERE.md**: Schritt-für-Schritt-Anleitung für den Einstieg
 
-## 🧪 Testing
+## 🧪 Tests
 
-Run tests with:
+Tests ausführen mit:
 ```bash
 pytest tests/
 ```
 
-## 🤝 Contributing
+## 🤝 Beitragen
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Beiträge sind willkommen! Bitte zögern Sie nicht, einen Pull Request einzureichen.
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+1. Forken Sie das Repository
+2. Erstellen Sie Ihren Feature-Branch (`git checkout -b feature/AmazingFeature`)
+3. Committen Sie Ihre Änderungen (`git commit -m 'Add some AmazingFeature'`)
+4. Pushen Sie zum Branch (`git push origin feature/AmazingFeature`)
+5. Öffnen Sie einen Pull Request
 
-## 📝 License
+## 📝 Lizenz
 
-This project is open source and available for educational purposes.
+Dieses Projekt ist Open Source und für Bildungszwecke verfügbar.
 
-## 🙏 Acknowledgments
+## 🙏 Danksagungen
 
-- **yfinance**: For providing easy access to financial data
-- **Plotly**: For beautiful interactive visualizations
-- **Flask**: For the lightweight web framework
+- **yfinance**: Für den einfachen Zugang zu Finanzdaten
+- **Plotly**: Für schöne interaktive Visualisierungen
+- **Flask**: Für das leichtgewichtige Web-Framework
 
-## 📧 Contact
+## 📧 Kontakt
 
-For questions or issues, please open an issue on GitHub.
+Bei Fragen oder Problemen öffnen Sie bitte ein Issue auf GitHub.
 
 ---
 
-**Happy Analyzing! 📈**
+**Viel Erfolg beim Analysieren! 📈**
