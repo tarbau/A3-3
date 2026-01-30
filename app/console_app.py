@@ -1,11 +1,11 @@
 """
 Console application for financial data analysis.
-Provides a simple command-line interface to analyze stocks and cryptocurrencies.
+This file is written using only basic Python features,
+similar to the style used in the book "Python for Everybody".
 """
 
 import sys
 import logging
-from typing import Optional
 
 from src.utils import setup_logging, validate_ticker
 from src.data_fetcher import data_fetcher
@@ -29,7 +29,7 @@ def print_separator():
     print("-" * 60)
 
 
-def get_ticker_from_user() -> Optional[str]:
+def get_ticker_from_user():
     """
     Get ticker symbol from user input.
     
@@ -39,6 +39,7 @@ def get_ticker_from_user() -> Optional[str]:
     print("Enter a ticker symbol (e.g., AAPL, GOOGL, BTC-USD)")
     print("Or press Enter to use default (AAPL): ", end="")
     
+    # Read what the user typed and remove spaces
     user_input = input().strip()
     
     if not user_input:
@@ -51,7 +52,7 @@ def get_ticker_from_user() -> Optional[str]:
         return None
 
 
-def display_company_info(company_info: dict):
+def display_company_info(company_info):
     """
     Display company/cryptocurrency information.
     
@@ -59,7 +60,7 @@ def display_company_info(company_info: dict):
         company_info: Dictionary with company information
     """
     print_separator()
-    print("📊 COMPANY INFORMATION")
+    print("COMPANY INFORMATION")
     print_separator()
     print(f"Name:        {company_info.get('name', 'N/A')}")
     print(f"Sector:      {company_info.get('sector', 'N/A')}")
@@ -72,7 +73,7 @@ def display_company_info(company_info: dict):
     print()
 
 
-def display_statistics(stats: dict):
+def display_statistics(stats):
     """
     Display calculated statistics.
     
@@ -80,7 +81,7 @@ def display_statistics(stats: dict):
         stats: Dictionary with statistics
     """
     print_separator()
-    print("📈 STATISTICS (Last 12 Months)")
+    print("STATISTICS (Last 12 Months)")
     print_separator()
     
     formatted = stats.get('formatted', {})
@@ -105,8 +106,16 @@ def main():
     
     # Get ticker from command line argument or user input
     ticker = None
-    if len(sys.argv) > 1:
-        ticker = sys.argv[1].strip().upper()
+    if len(sys.argv) > 1: # system is module and with.argv is the arguments passed to the module
+        # Get the argument from command line
+        raw_input = sys.argv[1]
+        
+        # Remove any spaces at the beginning or end
+        cleaned_input = raw_input.strip()
+        
+        # Convert to uppercase
+        ticker = cleaned_input.upper()
+        
         if not validate_ticker(ticker):
             print(f"❌ Invalid ticker symbol: {ticker}")
             ticker = None
@@ -118,7 +127,7 @@ def main():
         print("❌ No valid ticker provided. Exiting.")
         return
     
-    print(f"\n🔍 Analyzing: {ticker}")
+    print("\nAnalyzing:", ticker)
     print("Please wait...\n")
     
     # Fetch data
@@ -154,9 +163,9 @@ def main():
     display_statistics(stats)
     
     print_separator()
-    print("✅ Analysis complete!")
+    print("Analysis complete!")
     print_separator()
-    print("\n💡 Tips:")
+    print("\nTips:")
     print("  - Try different tickers: TSLA, MSFT, ETH-USD, DOGE-USD")
     print("  - Run with ticker as argument: python -m app.console_app GOOGL")
     print()
@@ -166,9 +175,9 @@ if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
-        print("\n\n👋 Goodbye!")
+        print("\n\nGoodbye!")
         sys.exit(0)
     except Exception as e:
-        logger.error(f"Unexpected error: {str(e)}", exc_info=True)
-        print(f"\n❌ An error occurred: {str(e)}")
+        logger.error("Unexpected error: %s" % str(e), exc_info=True)
+        print("\nAn error occurred:", str(e))
         sys.exit(1)

@@ -1,18 +1,15 @@
 """
 Utility functions for the financial analyzer application.
+This file only uses basic Python features, similar to
+what is shown in the book "Python for Everybody".
 """
 
 import logging
-from typing import Optional
-from datetime import datetime
 
 
-def setup_logging(level: int = logging.INFO) -> None:
+def setup_logging(level=logging.INFO):
     """
     Set up logging configuration for the application.
-    
-    Args:
-        level: Logging level (default: INFO)
     """
     logging.basicConfig(
         level=level,
@@ -21,26 +18,30 @@ def setup_logging(level: int = logging.INFO) -> None:
     )
 
 
-def validate_ticker(ticker: str) -> bool:
+def validate_ticker(ticker):
     """
-    Validate ticker symbol format.
+    Check if a ticker has sensible format such as AAPL, GOOGL, BTC-USD, ETH-USD, etc.
     
-    Args:
-        ticker: Ticker symbol to validate
-        
-    Returns:
-        True if ticker appears valid, False otherwise
+    Returns True if it looks ok, False if not.
     """
-    if not ticker or not isinstance(ticker, str):
+    # If nothing was given, it's not valid
+    if not ticker:
         return False
-    
-    # Basic validation: should be alphanumeric with possible hyphens
-    ticker_clean = ticker.strip().upper()
-    if len(ticker_clean) < 1 or len(ticker_clean) > 20:
+
+
+
+    # If it's now empty, it's not valid
+    if len(ticker)==0:
         return False
-    
-    # Allow alphanumeric and hyphens (for crypto like BTC-USD)
-    return all(c.isalnum() or c == "-" for c in ticker_clean)
+
+    # Go through each character
+    for ch in ticker:
+        # If the character is not a letter, not a number, and not '-'
+        if not ch.isalnum() and ch != "-":
+            return False
+
+    # If we reach here, everything was okay
+    return True
 
 
 def format_currency(value: float, currency: str = "USD") -> str:
