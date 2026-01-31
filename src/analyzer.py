@@ -5,12 +5,9 @@ Data analysis module for calculating financial statistics.
 import logging
 from typing import Dict, Any, Optional
 import pandas as pd
-import numpy as np
 
-from src.utils import format_currency, format_percentage, format_number
+from src.utils import format_currency, format_percentage
 
-# Set up logger
-logger = logging.getLogger(__name__)
 
 
 class FinancialAnalyzer:
@@ -53,7 +50,7 @@ class FinancialAnalyzer:
             high_52w = float(prices.max())
             low_52w = float(prices.min())
             avg_price = float(prices.mean())
-            current = float(current_price) if current_price else float(prices.iloc[-1])
+            current = float(current_price) if current_price is not None else float(prices.iloc[-1])
             
             # Calculate price change
             first_price = float(prices.iloc[0])
@@ -89,8 +86,8 @@ class FinancialAnalyzer:
                     "price_change": format_currency(price_change, currency),
                     "price_change_pct": format_percentage(price_change_pct),
                     "volatility": format_percentage(volatility),
-                    "avg_30d": format_currency(avg_30d, currency) if avg_30d else "N/A",
-                    "avg_90d": format_currency(avg_90d, currency) if avg_90d else "N/A",
+                    "avg_30d": format_currency(avg_30d, currency),
+                    "avg_90d": format_currency(avg_90d, currency),
                 }
             }
             
