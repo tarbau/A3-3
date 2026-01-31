@@ -1,6 +1,5 @@
 # Quick Start Guide
 
-## 🚀 Get Started in 5 Minutes
 
 ### Step 1: Create Virtual Environment
 
@@ -40,7 +39,7 @@ python -m app.web_app
 
 Then open your browser and go to: `http://localhost:5000`
 
-## 📝 Example Tickers
+## Example Tickers
 
 ### Stocks
 - `AAPL` - Apple
@@ -49,19 +48,6 @@ Then open your browser and go to: `http://localhost:5000`
 - `TSLA` - Tesla
 - `AMZN` - Amazon
 
-### Cryptocurrencies
-- `BTC-USD` - Bitcoin
-- `ETH-USD` - Ethereum
-- `DOGE-USD` - Dogecoin
-- `BNB-USD` - Binance Coin
-
-## 🎯 What You'll Learn
-
-1. **Data Fetching**: How to get real-time financial data
-2. **Data Analysis**: Calculate statistics like high, low, average, volatility
-3. **Data Visualization**: Create interactive charts with Plotly
-4. **Web Development**: Build a Flask web application
-5. **Best Practices**: Project structure, error handling, logging
 
 ## 🐛 Troubleshooting
 
@@ -74,11 +60,4 @@ Then open your browser and go to: `http://localhost:5000`
 **Problem**: Port 5000 already in use
 - **Solution**: Change port in `app/web_app.py` (line with `port=5000`)
 
-## 📚 Next Steps
-
-1. Try different tickers
-2. Modify the analysis functions in `src/analyzer.py`
-3. Customize the web dashboard in `templates/index.html`
-4. Add new features like technical indicators
-5. Explore the code to understand how it works!
 
