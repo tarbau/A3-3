@@ -10,6 +10,9 @@ plotly==5.18.0
 # Environment management
 python-dotenv==1.0.0
 
+# Forecasting (optional, requires statsmodels)
+statsmodels==0.14.2
+
 # Development (optional)
 pytest==7.4.3
 black==23.12.1
