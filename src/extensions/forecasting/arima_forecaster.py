@@ -9,8 +9,6 @@ import logging
 import pandas as pd
 import numpy as np
 
-logger = logging.getLogger(__name__)
-
 
 class ForecastError(Exception):
     """Raised when a forecast cannot be produced."""
