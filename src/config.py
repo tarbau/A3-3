@@ -35,9 +35,6 @@ def _parse_float(raw_value: str, default: float) -> float:
 class Config:
     """Application configuration class."""
     
-    # Alpha Vantage API (optional)
-    ALPHA_VANTAGE_API_KEY = os.getenv("ALPHA_VANTAGE_API_KEY", "")
-    
     # Flask configuration
     FLASK_ENV = os.getenv("FLASK_ENV", "development")
     FLASK_DEBUG = os.getenv("FLASK_DEBUG", "True").lower() == "true"
