@@ -285,19 +285,3 @@ Once everything is working:
    - Edit `static/style.css` to change styling
    - Add new features in `src/analyzer.py`
 
-3. **Learn more:**
-   - Read the full `README.md`
-   - Check out `QUICKSTART.md` for more examples
-
----
-
-## Need Help?
-
-If you encounter any issues:
-1. Check the error message carefully
-2. Review the troubleshooting section above
-3. Make sure all prerequisites are met
-4. Verify you're in the correct directory with virtual environment activated
-
-Happy analyzing! 📊
-
