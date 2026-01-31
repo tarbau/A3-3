@@ -2,7 +2,6 @@
 
 ## 1. Zielsetzung und Funktionalität
 
-<<<<<<< HEAD
 ### Zielsetzung
 
 Entwicklung einer Python-Anwendung zur Analyse von Aktien und Kryptowährungen mit folgenden Zielen:
@@ -22,7 +21,6 @@ Entwicklung einer Python-Anwendung zur Analyse von Aktien und Kryptowährungen m
 - **Visualisierung**: Interaktive Diagramme mit Preisverlauf und Volumen
 
 ## 2. Hinweise zur Ausführung
-=======
 ## Funktionen
 
 - **Echtzeit-Datenabruf**: Abrufen aktueller Finanzdaten für Aktien und Kryptowährungen mit yfinance
@@ -84,7 +82,6 @@ Dann Browser öffnen: `http://localhost:5000`
 
 ## 3. Aufbau des Projekts
 
-<<<<<<< HEAD
 ### Projektstruktur
 =======
 #### Option 3: Batch-Dateien verwenden (Windows)
@@ -175,11 +172,8 @@ SemProject/
 - **`templates/`** und **`static/`**: Frontend-Ressourcen für Web-Dashboard
 - **`tests/`**: Unit-Tests
 
-<<<<<<< HEAD
 ## 4. Gruppenmitglieder und Teilaufgaben
-=======
 ## Unterstützte Ticker
->>>>>>> e9c015751f0f5e605680cc3f9dbb59cd22cad1b2
 
 ### Gruppenmitglieder
 
@@ -189,11 +183,10 @@ SemProject/
 | [Name 2] | [Matrikelnummer] | [Aufgabenbeschreibung] |
 | [Name 3] | [Matrikelnummer] | [Aufgabenbeschreibung] |
 
-<<<<<<< HEAD
+
 ### Detaillierte Aufgabenverteilung
-=======
+
 ## Konfiguration
->>>>>>> e9c015751f0f5e605680cc3f9dbb59cd22cad1b2
 
 #### [Name 1]
 - **Aufgabe 1**: [Beschreibung der übernommenen Aufgabe]
@@ -262,4 +255,4 @@ Dieses Projekt wurde mit Hilfe von Large Language Models (LLMs) entwickelt. LLMs
 - **Debugging**: Fehleranalyse und Problemlösung
 - **Code-Erklärungen**: Dokumentation und Konzept-Vermittlung
 - **Frontend-Entwicklung**: UI/UX-Design, responsive Chart-Darstellung und CSS-Optimierung
->>>>>>> e9c015751f0f5e605680cc3f9dbb59cd22cad1b2
+
