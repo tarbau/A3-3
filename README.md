@@ -1,23 +1,22 @@
-# 📊 Finanzdaten-Analysator
+# Finanzdaten-Analysator
 
 Eine umfassende Python-Anwendung zur Analyse von Aktien und Kryptowährungen mit sowohl Konsolen-als auch Web-Oberflächen. Abrufen von Echtzeit-Finanzdaten, Berechnung von Statistiken und Visualisierung von Trends mit interaktiven Diagrammen.
 
-## ✨ Funktionen
+## Funktionen
 
-- **📈 Echtzeit-Datenabruf**: Abrufen aktueller Finanzdaten für Aktien und Kryptowährungen mit yfinance
-- **🔢 Statistische Analyse**: Berechnung wichtiger Kennzahlen einschließlich:
+- **Echtzeit-Datenabruf**: Abrufen aktueller Finanzdaten für Aktien und Kryptowährungen mit yfinance
+- **Statistische Analyse**: Berechnung wichtiger Kennzahlen einschließlich:
   - Aktueller Preis, 52-Wochen-Hoch/Tief
   - Durchschnittspreise (30-Tage, 90-Tage, gesamt)
   - Preisänderungen und Prozentsätze
   - Volatilitätsberechnungen
-- **💻 Doppelte Benutzeroberfläche**:
+- **Doppelte Benutzeroberfläche**:
   - **Konsolen-Anwendung**: Befehlszeilen-Interface für schnelle Analysen
   - **Web-Dashboard**: Interaktive browserbasierte Oberfläche mit Plotly-Diagrammen
-- **📊 Interaktive Visualisierungen**: Schöne, interaktive Diagramme mit Preisverlauf und Volumen
-- **🌐 Multi-Asset-Unterstützung**: Analyse von Aktien (AAPL, GOOGL, TSLA) und Kryptowährungen (BTC-USD, ETH-USD)
-- **🏗️ Modulare Architektur**: Saubere, wartbare Codestruktur mit klarer Trennung der Verantwortlichkeiten
+- **Interaktive Visualisierungen**: Schöne, interaktive Diagramme mit Preisverlauf und Volumen
+- **Multi-Asset-Unterstützung**: Analyse von Aktien (AAPL, GOOGL, TSLA) und Kryptowährungen (BTC-USD, ETH-USD)
+- **Modulare Architektur**: Saubere, wartbare Codestruktur mit klarer Trennung der Verantwortlichkeiten
 
-## 🚀 Schnellstart
 
 ### Voraussetzungen
 
@@ -74,7 +73,7 @@ python -m app.web_app
 - Doppelklicken Sie auf `run_console.bat` für die Konsolen-App
 - Doppelklicken Sie auf `run_web.bat` für das Web-Dashboard
 
-## 📖 Verwendungsbeispiele
+## Verwendungsbeispiele
 
 ### Konsolen-Anwendung
 
@@ -120,7 +119,7 @@ stats = analyzer.calculate_statistics(historical_data, current_price, "USD")
 
 Siehe `example_usage.py` für detailliertere Beispiele.
 
-## 📁 Projektstruktur
+## Projektstruktur
 
 ```
 SemProject/
@@ -145,7 +144,7 @@ SemProject/
 └── README.md               # Diese Datei
 ```
 
-## 🛠️ Verwendete Technologien
+## Verwendete Technologien
 
 - **Python 3.8+**: Kernprogrammiersprache
 - **yfinance**: Finanzdatenabruf
@@ -155,7 +154,7 @@ SemProject/
 - **Plotly**: Interaktive Datenvisualisierung
 - **python-dotenv**: Verwaltung von Umgebungsvariablen
 
-## 📊 Unterstützte Ticker
+## Unterstützte Ticker
 
 ### Aktien
 - `AAPL` - Apple Inc.
@@ -172,7 +171,7 @@ SemProject/
 - `BNB-USD` - Binance Coin
 - Und viele mehr...
 
-## ⚙️ Konfiguration
+## Konfiguration
 
 Die Konfiguration wird in `src/config.py` verwaltet. Sie können anpassen:
 
@@ -182,7 +181,7 @@ Die Konfiguration wird in `src/config.py` verwaltet. Sie können anpassen:
   - Optionen: `1m`, `5m`, `15m`, `30m`, `1h`, `1d`, `5d`, `1wk`, `1mo`
 - **Flask-Einstellungen**: Debug-Modus, Umgebungsvariablen
 
-## 🐛 Fehlerbehebung
+## Fehlerbehebung
 
 ### ModuleNotFoundError
 - **Lösung**: Stellen Sie sicher, dass die virtuelle Umgebung aktiviert ist und die Abhängigkeiten installiert sind
@@ -205,50 +204,30 @@ Die Konfiguration wird in `src/config.py` verwaltet. Sie können anpassen:
   Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
   ```
 
-## 📚 Dokumentation
+## Dokumentation
 
 - **QUICKSTART.md**: Schnellstart-Anleitung (5 Minuten)
 - **SETUP_GUIDE.md**: Detaillierte Installationsanweisungen
 - **START_HERE.md**: Schritt-für-Schritt-Anleitung für den Einstieg
 
-## 🧪 Tests
+##  Tests
 
 Tests ausführen mit:
 ```bash
 pytest tests/
-```
 
-## 🤝 Beitragen
 
-Beiträge sind willkommen! Bitte zögern Sie nicht, einen Pull Request einzureichen.
 
-1. Forken Sie das Repository
-2. Erstellen Sie Ihren Feature-Branch (`git checkout -b feature/AmazingFeature`)
-3. Committen Sie Ihre Änderungen (`git commit -m 'Add some AmazingFeature'`)
-4. Pushen Sie zum Branch (`git push origin feature/AmazingFeature`)
-5. Öffnen Sie einen Pull Request
-
-## 📝 Lizenz
-
-Dieses Projekt ist Open Source und für Bildungszwecke verfügbar.
-
-## 🙏 Danksagungen
+##  Danksagungen
 
 - **yfinance**: Für den einfachen Zugang zu Finanzdaten
 - **Plotly**: Für schöne interaktive Visualisierungen
 - **Flask**: Für das leichtgewichtige Web-Framework
 
-## 📧 Kontakt
 
-Bei Fragen oder Problemen öffnen Sie bitte ein Issue auf GitHub.
-
-## 🤖 LLM-Unterstützung
+## LLM-Unterstützung
 
 Dieses Projekt wurde mit Hilfe von Large Language Models (LLMs) entwickelt. LLMs unterstützten bei:
 - **Debugging**: Fehleranalyse und Problemlösung
 - **Code-Erklärungen**: Dokumentation und Konzept-Vermittlung
 - **Frontend-Entwicklung**: UI/UX-Design, responsive Chart-Darstellung und CSS-Optimierung
-
----
-
-**Viel Erfolg beim Analysieren! 📈**
